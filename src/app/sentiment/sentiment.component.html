@@ -1,0 +1,13 @@
+<div>
+    
+    <h1> {{ companyName }}</h1>
+
+    <ng-container *ngFor="let sentiment of sentimentData">
+        <app-sentiment-month [sentiment]="sentiment"></app-sentiment-month>
+    </ng-container>
+    <div *ngIf="!sentimentData.length">
+        No sentiment data available.
+    </div>
+
+</div>
+<a [routerLink]="['/dashboard']" class="link-button">&#8249; Back to list of stocks</a>

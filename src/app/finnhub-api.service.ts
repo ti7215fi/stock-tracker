@@ -1,9 +1,10 @@
+import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QuoteResponse, SearchResponse } from './finnhub';
-import { Quote } from './stock';
+import { QuoteResponse, SearchResponse, SentimentResponse } from './finnhub';
+import { Month, Quote, Sentiment } from './stock';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,34 @@ export class FinnhubApiService {
     )
   }
 
+  fetchSentimentData(symbol: string): Observable<Sentiment[]> {
+    const now = new Date();
+
+    const toDate = new Date(now.getFullYear(), now.getMonth(), 0);
+    const to = this.formatDate(toDate);
+
+    const fromDate = new Date(now.getFullYear(), now.getMonth() -3, 1);
+    const from = this.formatDate(fromDate);
+    
+    const uri = this.buildUri(`stock/insider-sentiment?symbol=${symbol}&from=${from}&to=${to}`);
+
+    return this.http.get<SentimentResponse>(uri).pipe(
+      map((response: SentimentResponse) => {
+        return response.data.map((item) => {
+          return new Sentiment(
+            item.month as Month,
+            item.change,
+            item.mspr
+          )
+        })
+      }),
+      catchError((error) => {
+        console.error(error);
+        return [];
+      })
+    )
+  }
+
   private findSuitableCompanyName(symbol: string, response: SearchResponse): string {
     if (response.count <= 0) {
       return 'Unkown';
@@ -59,6 +88,11 @@ export class FinnhubApiService {
   private buildUri(resource: string): string {
     const token = environment.finnhubApiToken;
     return `${FinnhubApiService.BASE_URI}/${resource}&token=${token}`;
+  }
+
+  private formatDate(date: Date): string {
+    const dateFormat = 'yyyy-MM-dd';
+    return formatDate(date, dateFormat, 'en-US');
   }
 
 }

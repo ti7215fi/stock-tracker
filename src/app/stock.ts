@@ -1,7 +1,6 @@
 export type Price = number
 export type Percent = number
-
-export type Trend = "UP" | "DOWN" | "UNKNOWN"
+export type Month = 1|2|3|4|5|6|7|8|9|10|11|12
 export class Quote {
 
     constructor(
@@ -11,6 +10,23 @@ export class Quote {
         public highPrice: Price = 0
     ) {}
 }
+
+export class Sentiment {
+    
+    public month: string = "UNKNOWN";
+
+    constructor(
+        private monthNumber: Month = 1,
+        public change: number = 0,
+        public mspr: number = 0
+    ) {
+        const date = new Date();
+        date.setMonth(monthNumber - 1);
+        this.month = date.toLocaleString('en-US', {
+            month: 'long'
+        });
+    }
+}
 export class Stock {
 
     constructor(
@@ -18,8 +34,4 @@ export class Stock {
         public companyName?: string,
         public quote?: Quote
     ) {}
-}
-
-export function getTrend(quote: Quote): Trend {
-    return quote.change >= 0 ? "UP" : "DOWN"
 }

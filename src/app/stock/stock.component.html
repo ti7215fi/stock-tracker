@@ -1,11 +1,8 @@
-<div class="container">
+<div class="card">
 
     <div class="header">
-        <h1 *ngIf="companyName$ | async as companyName; else loadingName">
-            {{ companyName }}
-        </h1>
+        <app-company-name [symbol]="symbol"></app-company-name>
         <button (click)="removeStock()">X</button>
-        <ng-template #loadingName><h1>&#9203; Loading ...</h1></ng-template>
     </div>
 
     <ng-container *ngIf="quote$ | async as quote; else loadingQuote">
@@ -18,15 +15,14 @@
             <p>Current price {{ quote.currentPrice | currency }}</p>
             <p>High price {{ quote.highPrice | currency }}</p>
         </div>
-        <div class="quote arrow">
-            <span *ngIf="showArrowUp(quote)" class="arrow-up">&#11014;</span>
-            <span *ngIf="showArrowDown(quote)" class="arrow-down">&#11015;</span>
+        <div class="quote">
+            <span appArrow [number]="quote.change"></span>
         </div>
     </ng-container>
     <ng-template #loadingQuote><div>&#9203; Loading ...</div></ng-template>
     
     <div>
-        <a>
+        <a [routerLink]="['/sentiment/' + symbol]" class="link-button">
             Go to social sentiment details >
         </a>
     </div>

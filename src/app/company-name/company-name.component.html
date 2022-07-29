@@ -1,0 +1,4 @@
+<h1 *ngIf="companyName$ | async as companyName; else loading">
+    {{ companyName }}
+</h1>
+<ng-template #loading><h1>&#9203; Loading ...</h1></ng-template>
