@@ -12,9 +12,10 @@ export class Logger {
 
   constructor() { }
 
-  log(msg: string) {
+  log(message?: any, ...optionalParams: any[]) {
     if (this.isEnabled) {
-      console.log(msg);
+      console.log(message, optionalParams);
     }
   }
+
 }

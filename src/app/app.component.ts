@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Stock } from './stock';
+import { StockService } from './stock.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'stock-tracker';
+  
+  get stocks(): Stock[] {
+    return this.stockService.stocks;
+  }
+
+  constructor(private stockService: StockService) {}
+
 }

@@ -1,0 +1,33 @@
+<div class="container">
+
+    <div class="header">
+        <h1 *ngIf="companyName$ | async as companyName; else loadingName">
+            {{ companyName }}
+        </h1>
+        <button (click)="removeStock()">X</button>
+        <ng-template #loadingName><h1>&#9203; Loading ...</h1></ng-template>
+    </div>
+
+    <ng-container *ngIf="quote$ | async as quote; else loadingQuote">
+        <div class="quote">
+            <p>Change today {{ quote.change | percent:'1.1-3' }}</p>
+            <p>Opening price {{ quote.openingPrice | currency }}</p>
+        </div>
+    
+        <div class="quote">
+            <p>Current price {{ quote.currentPrice | currency }}</p>
+            <p>High price {{ quote.highPrice | currency }}</p>
+        </div>
+        <div class="quote arrow">
+            <span *ngIf="showArrowUp(quote)" class="arrow-up">&#11014;</span>
+            <span *ngIf="showArrowDown(quote)" class="arrow-down">&#11015;</span>
+        </div>
+    </ng-container>
+    <ng-template #loadingQuote><div>&#9203; Loading ...</div></ng-template>
+    
+    <div>
+        <a>
+            Go to social sentiment details >
+        </a>
+    </div>
+</div>
