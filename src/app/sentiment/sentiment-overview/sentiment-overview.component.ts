@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit, TrackByFunction } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Sentiment } from 'src/app/core/stock.model';
-import { StockService } from 'src/app/core/stock.service';
 
 
 @Component({
@@ -12,7 +11,7 @@ import { StockService } from 'src/app/core/stock.service';
 })
 export class SentimentOverviewComponent implements OnInit, OnDestroy {
 
-  companyName: string = '';
+  symbol: string = '';
   sentimentData: Sentiment[] = [];
 
   readonly trackByMonth: TrackByFunction<Sentiment> = (idx, data) => data.month;
@@ -20,8 +19,7 @@ export class SentimentOverviewComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private stockService: StockService
+    private activatedRoute: ActivatedRoute
     ) { }
 
   ngOnInit(): void {
@@ -35,8 +33,7 @@ export class SentimentOverviewComponent implements OnInit, OnDestroy {
 
   private setupCompanyName() {
     const routeParamsSub = this.activatedRoute.params.subscribe(params => {
-      const stock = this.stockService.getStockBySymbol(params['symbol']);
-      this.companyName = stock?.companyName ?? 'UNKNOWN';
+      this.symbol = params['symbol'];
     });
     this.subscriptions.push(routeParamsSub);
   }
