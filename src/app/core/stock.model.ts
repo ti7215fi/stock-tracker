@@ -13,7 +13,7 @@ export class Quote {
 
 export class Sentiment {
     
-    public displayMonth: string = "UNKNOWN";
+    public displayMonth: string = 'UNKNOWN';
 
     constructor(
         public month: Month = 1,

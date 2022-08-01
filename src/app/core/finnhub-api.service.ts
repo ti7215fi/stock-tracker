@@ -3,8 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { QuoteResponse, SearchResponse, SentimentResponse } from './finnhub';
-import { Month, Quote, Sentiment } from './stock';
+import { QuoteResponse, SearchResponse, SentimentResponse } from './finnhub-api.model';
+import { Month, Quote, Sentiment } from './stock.model';
 
 @Injectable({
   providedIn: 'root'

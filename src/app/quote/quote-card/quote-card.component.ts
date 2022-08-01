@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Quote } from 'src/app/core/stock';
+import { Quote } from 'src/app/core/stock.model';
 import { StockService } from 'src/app/core/stock.service';
 
 

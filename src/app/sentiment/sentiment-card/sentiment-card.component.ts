@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Sentiment } from 'src/app/core/stock';
+import { Sentiment } from 'src/app/core/stock.model';
 
 @Component({
   selector: 'app-sentiment-card',

@@ -1,5 +1,5 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
-import { Stock } from '../../core/stock';
+import { Stock } from '../../core/stock.model';
 import { StockService } from '../../core/stock.service';
 
 @Component({

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of, tap } from 'rxjs';
 import { FinnhubApiService } from './finnhub-api.service';
 import { Logger } from './logger.service';
-import { Quote, Stock } from './stock';
+import { Quote, Stock } from './stock.model';
 import { StorageService } from './storage.service';
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit, TrackByFunction } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Sentiment } from 'src/app/core/stock';
+import { Sentiment } from 'src/app/core/stock.model';
 import { StockService } from 'src/app/core/stock.service';
 
 

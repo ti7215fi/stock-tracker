@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { FinnhubApiService } from '../core/finnhub-api.service';
-import { Sentiment } from '../core/stock';
+import { Sentiment } from '../core/stock.model';
 
 @Injectable({
   providedIn: 'root'
