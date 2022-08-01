@@ -17,7 +17,7 @@ const icons = {
 })
 export class TrendIndicatorDirective implements OnInit {
 
-  @Input() number: number = 0;
+  @Input() change: number = 0;
 
   private set indicator(indicator: Indicator) {
     this.setIcon(indicator.icon);
@@ -34,12 +34,12 @@ export class TrendIndicatorDirective implements OnInit {
 
     this.setFontSize();
   
-    if (this.number > 0) {
+    if (this.change > 0) {
       this.indicator = { 
         icon: icons.arrowUp,
         color: 'green'
       }
-    } else if (this.number < 0) {
+    } else if (this.change < 0) {
       this.indicator = { 
         icon: icons.arrowDown,
         color: 'red'
