@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Sentiment } from '../stock';
+import { Sentiment } from 'src/app/core/stock';
 
 @Component({
   selector: 'app-sentiment-month',

@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit, TrackByFunction } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, take } from 'rxjs';
-import { Sentiment } from '../stock';
-import { StockService } from '../stock.service';
+import { Sentiment } from 'src/app/core/stock';
+import { StockService } from 'src/app/core/stock.service';
+
 
 @Component({
   selector: 'app-sentiment',

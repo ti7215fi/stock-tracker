@@ -1,20 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SentimentResolver } from './sentiment.resolver';
-import { SentimentComponent } from './sentiment/sentiment.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent
+    loadChildren: () => import('./quote/quote.module').then(m => m.QuoteModule)
   },
   {
-    path: 'sentiment/:symbol',
-    component: SentimentComponent,
-    resolve: {
-      sentimentData: SentimentResolver
-    }
+    path: 'sentiment',
+    loadChildren: () => import('./insider-sentiment/insider-sentiment.module').then(m => m.InsiderSentimentModule)
   },
   {
     path: '**',

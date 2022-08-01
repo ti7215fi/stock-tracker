@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Stock } from '../stock';
-import { StockService } from '../stock.service';
+import { Stock } from '../../core/stock';
+import { StockService } from '../../core/stock.service';
 
 @Component({
   selector: 'app-stock-form',

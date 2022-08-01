@@ -1,6 +1,6 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
-import { Stock } from '../stock';
-import { StockService } from '../stock.service';
+import { Stock } from '../../core/stock';
+import { StockService } from '../../core/stock.service';
 
 @Component({
   selector: 'app-dashboard',

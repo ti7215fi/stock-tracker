@@ -5,8 +5,8 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { FinnhubApiService } from './finnhub-api.service';
-import { Sentiment } from './stock';
+import { FinnhubApiService } from '../core/finnhub-api.service';
+import { Sentiment } from '../core/stock';
 
 @Injectable({
   providedIn: 'root'

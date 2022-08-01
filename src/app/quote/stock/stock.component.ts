@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Quote } from '../stock';
-import { StockService } from '../stock.service';
+import { Quote } from 'src/app/core/stock';
+import { StockService } from 'src/app/core/stock.service';
+
+
 
 @Component({
   selector: 'app-stock',

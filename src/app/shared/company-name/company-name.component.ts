@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { StockService } from '../stock.service';
+import { StockService } from 'src/app/core/stock.service';
+
 
 @Component({
   selector: 'app-company-name',
