@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'sentiment',
-    loadChildren: () => import('./insider-sentiment/insider-sentiment.module').then(m => m.InsiderSentimentModule)
+    loadChildren: () => import('./sentiment/sentiment.module').then(m => m.SentimentModule)
   },
   {
     path: '**',

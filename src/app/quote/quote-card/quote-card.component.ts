@@ -6,11 +6,11 @@ import { StockService } from 'src/app/core/stock.service';
 
 
 @Component({
-  selector: 'app-stock',
-  templateUrl: './stock.component.html',
-  styleUrls: ['./stock.component.scss']
+  selector: 'app-quote-card',
+  templateUrl: './quote-card.component.html',
+  styleUrls: ['./quote-card.component.scss']
 })
-export class StockComponent implements OnInit {
+export class QuoteCardComponent implements OnInit {
 
   @Input() symbol = '';
 

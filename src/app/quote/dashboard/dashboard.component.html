@@ -1,2 +1,2 @@
-<app-stock-form></app-stock-form>
-<app-stock *ngFor="let stock of stocks; trackBy: trackBySymbol" [symbol]="stock.symbol"></app-stock>
+<app-track-stock-form></app-track-stock-form>
+<app-quote-card *ngFor="let stock of stocks; trackBy: trackBySymbol" [symbol]="stock.symbol"></app-quote-card>

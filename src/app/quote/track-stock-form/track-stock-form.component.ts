@@ -4,11 +4,11 @@ import { Stock } from '../../core/stock';
 import { StockService } from '../../core/stock.service';
 
 @Component({
-  selector: 'app-stock-form',
-  templateUrl: './stock-form.component.html',
-  styleUrls: ['./stock-form.component.scss']
+  selector: 'app-track-stock-form',
+  templateUrl: './track-stock-form.component.html',
+  styleUrls: ['./track-stock-form.component.scss']
 })
-export class StockFormComponent implements OnInit {
+export class TrackStockFormComponent implements OnInit {
 
   stock: Stock = new Stock();
 

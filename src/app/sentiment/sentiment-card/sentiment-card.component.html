@@ -5,6 +5,6 @@
         <p>MSPR: {{ sentiment.mspr | number:'1.2-2' }}</p>
     </div>
     <div>
-        <span appArrow [number]="sentiment.change"></span>
+        <span appTrendIndicator [number]="sentiment.change"></span>
     </div>
 </div>

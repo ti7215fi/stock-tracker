@@ -16,7 +16,7 @@
             <p>High price {{ quote.highPrice | currency }}</p>
         </div>
         <div class="quote">
-            <span appArrow [number]="quote.change"></span>
+            <span appTrendIndicator [number]="quote.change"></span>
         </div>
     </ng-container>
     <ng-template #loadingQuote><div>&#9203; Loading ...</div></ng-template>

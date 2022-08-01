@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Sentiment } from 'src/app/core/stock';
 
 @Component({
-  selector: 'app-sentiment-month',
-  templateUrl: './sentiment-month.component.html',
-  styleUrls: ['./sentiment-month.component.scss']
+  selector: 'app-sentiment-card',
+  templateUrl: './sentiment-card.component.html',
+  styleUrls: ['./sentiment-card.component.scss']
 })
-export class SentimentMonthComponent implements OnInit {
+export class SentimentCardComponent implements OnInit {
 
   @Input() sentiment: Sentiment = new Sentiment();
 

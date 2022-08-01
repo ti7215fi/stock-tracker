@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit, TrackByFunction } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, take } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Sentiment } from 'src/app/core/stock';
 import { StockService } from 'src/app/core/stock.service';
 
 
 @Component({
   selector: 'app-sentiment',
-  templateUrl: './sentiment.component.html',
-  styleUrls: ['./sentiment.component.scss']
+  templateUrl: './sentiment-overview.component.html',
+  styleUrls: ['./sentiment-overview.component.scss']
 })
-export class SentimentComponent implements OnInit, OnDestroy {
+export class SentimentOverviewComponent implements OnInit, OnDestroy {
 
   companyName: string = '';
   sentimentData: Sentiment[] = [];

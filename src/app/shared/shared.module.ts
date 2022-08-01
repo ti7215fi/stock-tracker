@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArrowDirective } from './arrow.directive';
+import { TrendIndicatorDirective } from './trend-indicator.directive';
 import { CompanyNameComponent } from './company-name/company-name.component';
 
 
 
 @NgModule({
   declarations: [
-    ArrowDirective,
+    TrendIndicatorDirective,
     CompanyNameComponent
   ],
   imports: [
     CommonModule
   ],
   exports: [
-    ArrowDirective,
+    TrendIndicatorDirective,
     CompanyNameComponent
   ]
 })
