@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, TrackByFunction } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, take } from 'rxjs';
 import { Sentiment } from '../stock';
@@ -13,6 +13,8 @@ export class SentimentComponent implements OnInit, OnDestroy {
 
   companyName: string = '';
   sentimentData: Sentiment[] = [];
+
+  readonly trackByMonth: TrackByFunction<Sentiment> = (idx, data) => data.month;
 
   private subscriptions: Subscription[] = [];
 

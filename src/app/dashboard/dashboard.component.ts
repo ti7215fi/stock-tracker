@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TrackByFunction } from '@angular/core';
 import { Stock } from '../stock';
 import { StockService } from '../stock.service';
 
@@ -12,7 +12,9 @@ export class DashboardComponent implements OnInit {
   get stocks(): Stock[] {
     return this.stockService.stocks;
   }
-  
+
+  readonly trackBySymbol: TrackByFunction<Stock> = (idx, stock) => stock.symbol;
+
   constructor(private stockService: StockService) { }
 
   ngOnInit(): void {

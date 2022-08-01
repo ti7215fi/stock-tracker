@@ -1,6 +1,6 @@
 <div class="card">
     <div>
-        <p>{{ sentiment.month | uppercase }}</p>
+        <p>{{ sentiment.displayMonth | uppercase }}</p>
         <p>Change: {{ sentiment.change | plusPrefix }}</p>
         <p>MSPR: {{ sentiment.mspr | number:'1.2-2' }}</p>
     </div>

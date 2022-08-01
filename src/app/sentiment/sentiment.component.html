@@ -2,7 +2,7 @@
     
     <h1> {{ companyName }}</h1>
 
-    <ng-container *ngFor="let sentiment of sentimentData">
+    <ng-container *ngFor="let sentiment of sentimentData; trackBy: trackByMonth;">
         <app-sentiment-month [sentiment]="sentiment"></app-sentiment-month>
     </ng-container>
     <div *ngIf="!sentimentData.length">

@@ -13,16 +13,16 @@ export class Quote {
 
 export class Sentiment {
     
-    public month: string = "UNKNOWN";
+    public displayMonth: string = "UNKNOWN";
 
     constructor(
-        private monthNumber: Month = 1,
+        public month: Month = 1,
         public change: number = 0,
         public mspr: number = 0
     ) {
         const date = new Date();
-        date.setMonth(monthNumber - 1);
-        this.month = date.toLocaleString('en-US', {
+        date.setMonth(month - 1);
+        this.displayMonth = date.toLocaleString('en-US', {
             month: 'long'
         });
     }
