@@ -55,10 +55,10 @@ describe('SentimentResolver', () => {
 
   it('resolves data recieved from server', done => {
     sentiments = [
-      new Sentiment(3, 5540, 12.209097),
-      new Sentiment(1, -1250, -5.6179776),
-      new Sentiment(2, -1250, -2.1459227),
-      new Sentiment(3, 5870, 8.960191)
+      new Sentiment(3, 2021, 5540, 12.209097),
+      new Sentiment(1, 2022, -1250, -5.6179776),
+      new Sentiment(2, 2022, -1250, -2.1459227),
+      new Sentiment(3, 2022, 5870, 8.960191)
     ]
     resolver.resolve(route.snapshot, routerSnapshotMock).subscribe(result => {
       expect(result).toBe(sentiments);

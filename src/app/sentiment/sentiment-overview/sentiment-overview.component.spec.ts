@@ -22,8 +22,8 @@ describe('SentimentOverviewComponent', () => {
           useValue: {
             params: of({symbol: 'APPL'}),
             data: of({ sentimentData: [      
-              new Sentiment(1, -1250, -5.6179776),
-              new Sentiment(2, -1250, -2.1459227)
+              new Sentiment(1, 2022, -1250, -5.6179776),
+              new Sentiment(2, 2022, -1250, -2.1459227)
             ]})
           }
         }

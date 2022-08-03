@@ -14,7 +14,7 @@ export class SentimentOverviewComponent implements OnInit, OnDestroy {
   symbol: string = '';
   sentimentData: Sentiment[] = [];
 
-  readonly trackByMonth: TrackByFunction<Sentiment> = (idx, data) => data.month;
+  readonly trackByMonth: TrackByFunction<Sentiment> = (idx, data) => `${data.year}${data.month}`;
 
   private subscriptions: Subscription[] = [];
 

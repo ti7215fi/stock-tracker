@@ -54,14 +54,14 @@ describe('SentimentCardComponent', () => {
       const change = paragraphs[1];
       const mspr = paragraphs[2];
 
-      component.sentiment = new Sentiment(3, 5540, 12.209097);
+      component.sentiment = new Sentiment(3, 2021, 5540, 12.209097),
       fixture.detectChanges();
 
       expect(month.innerHTML).toBe('MARCH');
       expect(change.innerHTML).toBe('Change: +5540');
       expect(mspr.innerHTML).toBe('MSPR: 12.21');
 
-      component.sentiment = new Sentiment(1, -1250, -5.6179776);
+      component.sentiment = new Sentiment(1, 2022, -1250, -5.6179776),
       fixture.detectChanges();
 
       expect(month.innerHTML).toBe('JANUARY');

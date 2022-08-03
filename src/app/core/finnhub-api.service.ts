@@ -64,6 +64,7 @@ export class FinnhubApiService {
         return response.data.map((item) => {
           return new Sentiment(
             item.month as Month,
+            item.year,
             item.change,
             item.mspr
           )

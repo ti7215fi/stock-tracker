@@ -17,6 +17,7 @@ export class Sentiment {
 
     constructor(
         public month?: Month,
+        public year?: number,
         public change: number = 0,
         public mspr: number = 0
     ) {
