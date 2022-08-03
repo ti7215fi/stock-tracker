@@ -5,6 +5,7 @@ import { SentimentCardComponent } from './sentiment-card/sentiment-card.componen
 import { InsiderSentimentRoutingModule } from './sentiment-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { SentimentOverviewComponent } from './sentiment-overview/sentiment-overview.component';
+import { MonthNamePipe } from './month-name.pipe';
 
 
 
@@ -13,6 +14,7 @@ import { SentimentOverviewComponent } from './sentiment-overview/sentiment-overv
     PlusPrefixPipe,
     SentimentOverviewComponent,
     SentimentCardComponent,
+    MonthNamePipe,
   ],
   imports: [
     CommonModule,

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Sentiment } from 'src/app/core/stock.model';
 import { TrendIndicatorDirective } from 'src/app/shared/trend-indicator.directive';
+import { MonthNamePipe } from '../month-name.pipe';
 import { PlusPrefixPipe } from '../plus-prefix.pipe';
 
 import { SentimentCardComponent } from './sentiment-card.component';
@@ -14,7 +15,8 @@ describe('SentimentCardComponent', () => {
       declarations: [ 
         SentimentCardComponent, 
         TrendIndicatorDirective,
-        PlusPrefixPipe
+        PlusPrefixPipe,
+        MonthNamePipe
        ]
     })
     .compileComponents();

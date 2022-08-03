@@ -12,27 +12,13 @@ export class Quote {
 }
 
 export class Sentiment {
-    
-    public displayMonth: string = 'UNKNOWN';
 
     constructor(
         public month?: Month,
         public year?: number,
         public change: number = 0,
         public mspr: number = 0
-    ) {
-        this.setupDisplayMonth(month);
-    }
-
-    private setupDisplayMonth(month: number | undefined) {
-        if (month) {
-            const date = new Date();
-            date.setMonth(month - 1);
-            this.displayMonth = date.toLocaleString('en-US', {
-                month: 'long'
-            });
-        }
-    }
+    ) {}
 }
 export class Stock {
 
