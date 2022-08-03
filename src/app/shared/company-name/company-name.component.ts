@@ -11,14 +11,18 @@ import { StockService } from 'src/app/core/stock.service';
 export class CompanyNameComponent implements OnInit {
 
   @Input() symbol = '';
+  @Input() showSymbol = false;
 
-  companyName$: Observable<string> = of('Unknown');
+  displayName$: Observable<string> = of('Unknown');
 
   constructor(private stockService: StockService) { }
 
   ngOnInit(): void {
-    this.companyName$ = this.stockService.getCompanyName(this.symbol).pipe(
-      map(name => name ?? 'Unknown')
+    this.displayName$ = this.stockService.getCompanyName(this.symbol).pipe(
+      map(name => {
+        const companyName = name ?? 'Unknown';
+        return this.showSymbol ? `${companyName} (${this.symbol})` : companyName
+      })
     );
   }
 
