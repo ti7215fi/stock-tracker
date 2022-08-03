@@ -60,6 +60,7 @@ describe('CompanyNameComponent', () => {
 
   it('shows a company name', waitForAsync(() => {
     companyName = 'Apple Inc';
+    component.showSymbol = false;
     fixture.detectChanges();
 
     fixture.whenStable().then(() => {
@@ -67,6 +68,20 @@ describe('CompanyNameComponent', () => {
 
       const compiled = fixture.nativeElement as HTMLElement;
       expect(compiled.querySelector('h1')?.textContent).toContain('Apple Inc');
+    })
+  }));
+
+  it('shows a company name with the stock symbol', waitForAsync(() => {
+    companyName = 'Apple Inc';
+    component.symbol = 'APPL';
+    component.showSymbol = true;
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      fixture.detectChanges();
+
+      const compiled = fixture.nativeElement as HTMLElement;
+      expect(compiled.querySelector('h1')?.textContent).toContain('Apple Inc (APPL)');
     })
   }));
 });
