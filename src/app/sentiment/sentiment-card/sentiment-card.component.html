@@ -4,7 +4,7 @@
         <p>Change: {{ sentiment.change | plusPrefix }}</p>
         <p>MSPR: {{ sentiment.mspr | number:'1.2-2' }}</p>
     </div>
-    <div>
+    <div class="float-right">
         <span appTrendIndicator [change]="sentiment.change"></span>
     </div>
 </div>

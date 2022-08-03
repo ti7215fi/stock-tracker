@@ -1,6 +1,13 @@
-.card {
+div {
     display: inline-block;
+}
+
+.card {
     margin-right: 16px;
     margin-bottom: 16px;
-    width: 250px;
+    width: 200px;
+}
+
+.float-right {
+    float: right;
 }
