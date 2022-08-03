@@ -105,7 +105,7 @@ describe('QuoteCardComponent', () => {
       const currentPrice = paragraphs[2];
       const highPrice = paragraphs[3];
 
-      expect(change.innerHTML).toBe('Change today 12.321%');
+      expect(change.innerHTML).toBe('Change today 0.12%');
       expect(openingPrice.innerHTML).toBe('Opening price $840.20');
       expect(currentPrice.innerHTML).toBe('Current price $842.70');
       expect(highPrice.innerHTML).toBe('High price $849.90');
