@@ -18,6 +18,7 @@ export class TrackStockFormComponent implements OnInit {
 
   onSubmit(form: NgForm): void {
     const stock: Stock = form.value;
+    stock.symbol = stock.symbol.toUpperCase();
     this.stockService.addStock(stock);
     form.resetForm();
   }

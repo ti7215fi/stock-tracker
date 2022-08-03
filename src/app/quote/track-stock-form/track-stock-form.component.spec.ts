@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 import { Stock } from 'src/app/core/stock.model';
 import { StockService } from 'src/app/core/stock.service';
 
@@ -18,8 +18,8 @@ describe('TrackStockFormComponent', () => {
         {
           provide: StockService,
           useValue: {
-            addStock(symbol: string) {
-              stocks.push(new Stock(symbol));
+            addStock(stock: Stock) {
+              stocks.push(stock);
             }
           }
         }
@@ -30,6 +30,10 @@ describe('TrackStockFormComponent', () => {
     fixture = TestBed.createComponent(TrackStockFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    stocks = [];
   });
 
   it('should create', () => {
@@ -63,4 +67,16 @@ describe('TrackStockFormComponent', () => {
       expect(button?.getAttribute('type')).toBe('submit');
     });
   }));
+
+  it('adds the symbol of a stock always in uppercase', () => {
+    let formResetted = false;
+    const resetForm = () => { formResetted = true; }
+    component.onSubmit({ value: { symbol: 'googl' }, resetForm } as NgForm);
+
+    expect(stocks[0]).toBeDefined();
+    expect(stocks[0]).not.toBeNull();
+    expect(stocks[0].symbol).toBe('GOOGL');
+
+    expect(formResetted).toBeTrue();
+  });
 });
