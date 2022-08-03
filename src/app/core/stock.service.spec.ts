@@ -45,10 +45,11 @@ describe('StockService', () => {
 
       service.addStock(appleStock);
       
-      expect(fakeStorage.getItem<Stock[]>('stocks')).toBeDefined();
-      expect(fakeStorage.getItem<Stock[]>('stocks')?.length).toBe(1);
-      expect(fakeStorage.getItem<Stock[]>('stocks')).toContain(appleStock);
-      expect(fakeStorage.getItem<Stock[]>('stocks')).not.toContain(teslaStock);
+      const stocks = getStocks();
+      expect(stocks).toBeDefined();
+      expect(stocks?.length).toBe(1);
+      expect(stocks).toContain(appleStock);
+      expect(stocks).not.toContain(teslaStock);
     })
 
     it('doesn\'t add a stock twice', () => {
@@ -57,9 +58,10 @@ describe('StockService', () => {
       service.addStock(appleStock);
       service.addStock(appleStock);
       
-      expect(fakeStorage.getItem<Stock[]>('stocks')).toBeDefined();
-      expect(fakeStorage.getItem<Stock[]>('stocks')?.length).toBe(1);
-      expect(fakeStorage.getItem<Stock[]>('stocks')).toContain(appleStock);
+      const stocks = getStocks();
+      expect(stocks).toBeDefined();
+      expect(stocks?.length).toBe(1);
+      expect(stocks).toContain(appleStock);
     })
   });
 
@@ -69,15 +71,15 @@ describe('StockService', () => {
       const teslaStock = new Stock('TSLA');
       service.addStock(teslaStock);
 
-      const cachedStocks = fakeStorage.getItem<Stock[]>('stocks');
-      expect(cachedStocks![0]).toEqual(teslaStock);
-      expect(cachedStocks![0].companyName).toBeUndefined();
+      const stocks = getStocks();
+      expect(stocks![0]).toEqual(teslaStock);
+      expect(stocks![0].companyName).toBeUndefined();
 
       teslaStock.companyName = 'Tesla Inc';
       service.updateStock(teslaStock);
 
-      expect(cachedStocks![0].companyName).toBeDefined();
-      expect(cachedStocks![0].companyName).toBe('Tesla Inc');
+      expect(stocks![0].companyName).toBeDefined();
+      expect(stocks![0].companyName).toBe('Tesla Inc');
     });
 
     it('doesn\'t throw an error is stock doesn\'t exist', () => {
@@ -225,4 +227,8 @@ describe('StockService', () => {
       }).not.toThrow();
     });
   });
+
+  function getStocks(): Stock[] | null {
+    return fakeStorage.getItem<Stock[]>('stocks')
+  }
 });
