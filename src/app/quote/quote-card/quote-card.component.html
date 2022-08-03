@@ -7,13 +7,13 @@
 
     <ng-container *ngIf="quote$ | async as quote; else loadingQuote">
         <div class="quote">
-            <p>Change today {{ quote?.change ?? '-' | percent:'1.1-3' }}</p>
-            <p>Opening price {{ quote?.openingPrice ?? '-' | currency }}</p>
+            <p>Change today {{ quote?.change ?? 0 | percent:'1.1-3' }}</p>
+            <p>Opening price {{ quote?.openingPrice ?? 0 | currency }}</p>
         </div>
     
         <div class="quote">
-            <p>Current price {{ quote?.currentPrice ?? '-' | currency }}</p>
-            <p>High price {{ quote?.highPrice ?? '-' | currency }}</p>
+            <p>Current price {{ quote?.currentPrice ?? 0 | currency }}</p>
+            <p>High price {{ quote?.highPrice ?? 0 | currency }}</p>
         </div>
         <div class="quote">
             <span appTrendIndicator [change]="quote?.change ?? 0"></span>
