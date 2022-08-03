@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { catchError, map, Observable, of, tap } from 'rxjs';
 import { FinnhubApiService } from './finnhub-api.service';
 import { Logger } from './logger.service';
 import { Quote, Stock } from './stock.model';
@@ -49,11 +49,11 @@ export class StockService {
     return stocks.find((item) => item.symbol === symbol) ?? null;
   }
 
-  getCompanyName(symbol: string): Observable<string> {
+  getCompanyName(symbol: string): Observable<string | null> {
     const stock = this.getStockBySymbol(symbol);
 
     if (!stock) {
-      return of('');
+      return of(null);
     }
 
     if (stock.companyName) {
@@ -62,17 +62,23 @@ export class StockService {
 
     return this.finnhubApi.fetchCompanyName(symbol).pipe(
       tap((n) => {
-        stock.companyName = n;
-        this.updateStock(stock);
+        if (n !== null) {
+          stock.companyName = n;
+          this.updateStock(stock);
+        }
+      }),
+      catchError(error => {
+        this.logger.error(error);
+        return of(null);
       })
     );
   }
 
-  getQuote(symbol: string): Observable<Quote> {
+  getQuote(symbol: string): Observable<Quote | null> {
     const stock = this.getStockBySymbol(symbol);
 
     if (!stock) {
-      return of(new Quote());
+      return of(null);
     }
 
     if (stock.quote) {
@@ -81,8 +87,14 @@ export class StockService {
 
     return this.finnhubApi.fetchQuote(symbol).pipe(
       tap((q) => {
-        stock.quote = q;
-        this.updateStock(stock);
+        if (q !== null) {
+          stock.quote = q;
+          this.updateStock(stock);
+        }
+      }),
+      catchError(error => {
+        this.logger.error(error);
+        return of(null);
       })
     )
   }

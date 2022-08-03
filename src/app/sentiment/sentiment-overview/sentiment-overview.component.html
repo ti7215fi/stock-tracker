@@ -6,7 +6,7 @@
     <ng-container *ngFor="let sentiment of sentimentData; trackBy: trackByMonth;">
         <app-sentiment-card [sentiment]="sentiment"></app-sentiment-card>
     </ng-container>
-    <div *ngIf="!sentimentData.length">
+    <div *ngIf="!sentimentData.length" class="no-sentiment-data">
         No sentiment data available.
     </div>
 </div>

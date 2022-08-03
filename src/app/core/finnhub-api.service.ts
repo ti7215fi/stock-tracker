@@ -1,9 +1,10 @@
 import { formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { QuoteResponse, SearchResponse, SentimentResponse } from './finnhub-api.model';
+import { Logger } from './logger.service';
 import { Month, Quote, Sentiment } from './stock.model';
 
 @Injectable({
@@ -14,11 +15,12 @@ export class FinnhubApiService {
   private static BASE_URI = 'https://finnhub.io/api/v1'
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private logger: Logger
   ) { }
 
-  fetchQuote(stockSymbol: string): Observable<Quote> {
-    const uri = this.buildUri(`quote?symbol=${stockSymbol}`)
+  fetchQuote(stockSymbol: string): Observable<Quote | null> {
+    const uri = this.buildUri(`quote?symbol=${stockSymbol}`);
     return this.http.get<QuoteResponse>(uri).pipe(
       map((response) => {
         return new Quote(
@@ -27,22 +29,28 @@ export class FinnhubApiService {
           response.c,
           response.h
         )
+      }),
+      catchError(error => {
+        this.logger.error(error);
+        return of(null);
       })
-    )
+    );
   }
 
-  fetchCompanyName(stockSymbol: string): Observable<string> {
-    const uri = this.buildUri(`search?q=${stockSymbol}`)
+  fetchCompanyName(stockSymbol: string): Observable<string | null> {
+    const uri = this.buildUri(`search?q=${stockSymbol}`);
     return this.http.get<SearchResponse>(uri).pipe(
       map((response: SearchResponse) => {
         return this.findSuitableCompanyName(stockSymbol, response);
+      }),
+      catchError(error => {
+        this.logger.error(error);
+        return of(null);
       })
-    )
+    );
   }
 
-  fetchSentimentData(symbol: string): Observable<Sentiment[]> {
-    const now = new Date();
-
+  fetchSentimentData(symbol: string, now: Date = new Date()): Observable<Sentiment[]> {
     const toDate = new Date(now.getFullYear(), now.getMonth(), 0);
     const to = this.formatDate(toDate);
 
@@ -62,15 +70,15 @@ export class FinnhubApiService {
         })
       }),
       catchError((error) => {
-        console.error(error);
-        return [];
+        this.logger.error(error);
+        return of([]);
       })
-    )
+    );
   }
 
-  private findSuitableCompanyName(symbol: string, response: SearchResponse): string {
+  private findSuitableCompanyName(symbol: string, response: SearchResponse): string | null {
     if (response.count <= 0) {
-      return 'Unkown';
+      return null;
     }
 
     if (response.count === 1) {

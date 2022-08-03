@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { Quote } from 'src/app/core/stock.model';
 import { StockService } from 'src/app/core/stock.service';
 
@@ -14,13 +14,15 @@ export class QuoteCardComponent implements OnInit {
 
   @Input() symbol = '';
 
-  quote$!: Observable<Quote>;
+  quote$: Observable<Quote> = of(new Quote());
 
   constructor(private stockService: StockService) { 
   }
 
   ngOnInit(): void {
-    this.quote$ = this.stockService.getQuote(this.symbol);
+    this.quote$ = this.stockService.getQuote(this.symbol).pipe(
+      map(quote => quote ?? new Quote())
+    );
   }
 
   removeStock(): void {

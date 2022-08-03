@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 })
 export class Logger {
 
-  private get isEnabled(): boolean {
+  protected get isEnabled(): boolean {
     return !environment.production
   }
 
@@ -15,6 +15,12 @@ export class Logger {
   log(message?: any, ...optionalParams: any[]) {
     if (this.isEnabled) {
       console.log(message, optionalParams);
+    }
+  }
+
+  error(message?: any, ...optionalParams: any[]) {
+    if (this.isEnabled) {
+      console.error(message, optionalParams);
     }
   }
 
