@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, ActivatedRouteSnapshot, convertToParamMap, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { FinnhubApiService } from '../core/finnhub-api.service';
 import { Sentiment } from '../core/stock.model';
+import { StockService } from '../core/stock.service';
 
 import { SentimentResolver } from './sentiment.resolver';
 
@@ -20,9 +20,9 @@ describe('SentimentResolver', () => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: FinnhubApiService,
+          provide: StockService,
           useValue: {
-            fetchSentimentData(symbol: string): Observable<Sentiment[]> {
+            getSentimentData(symbol: string): Observable<Sentiment[]> {
               return of(sentiments);
             }
           }

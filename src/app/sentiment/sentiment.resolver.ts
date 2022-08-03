@@ -5,22 +5,22 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { FinnhubApiService } from '../core/finnhub-api.service';
 import { Sentiment } from '../core/stock.model';
+import { StockService } from '../core/stock.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SentimentResolver implements Resolve<Sentiment[]> {
 
-  constructor(private finnhubApi: FinnhubApiService) {}
+  constructor(private stockService: StockService) {}
 
   resolve(
     route: ActivatedRouteSnapshot, 
     state: RouterStateSnapshot): Observable<Sentiment[]> {
     const symbol = route.paramMap.get('symbol');
     if (symbol !== null) {
-      return this.finnhubApi.fetchSentimentData(symbol);
+      return this.stockService.getSentimentData(symbol);
     }
     return of([])
   }

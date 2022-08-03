@@ -3,7 +3,7 @@ import { of, throwError } from 'rxjs';
 import { FinnhubApiService } from './finnhub-api.service';
 import { Logger } from './logger.service';
 import { loggerStub } from './logger.service.mock';
-import { Quote, Stock } from './stock.model';
+import { Month, Quote, Sentiment, Stock } from './stock.model';
 
 import { StockService } from './stock.service';
 import { StorageService } from './storage.service';
@@ -18,7 +18,7 @@ describe('StockService', () => {
   let service: StockService;
 
   beforeEach(() => {
-    const finnhubApiSpyObj = jasmine.createSpyObj('FinnhubApiService', ['fetchQuote', 'fetchCompanyName']);
+    const finnhubApiSpyObj = jasmine.createSpyObj('FinnhubApiService', ['fetchQuote', 'fetchCompanyName', 'fetchSentimentData']);
     fakeStorage = new StorageFakeService()
 
     TestBed.configureTestingModule({
@@ -203,6 +203,94 @@ describe('StockService', () => {
       });
     });
   });
+
+  describe('getSentimentData', () => {
+
+    it('returns three sentiment objects with empty data', done => {
+      finnhubApiSpy.fetchSentimentData.and.returnValue(of([]));
+
+      const currentMonth: Month = 8
+      const now = new Date(2022, currentMonth - 1, 2);
+
+      service.getSentimentData('APPL', now).subscribe(data => {
+
+        expect(data.length).toBe(3);
+        expect(data).toContain(new Sentiment(7, 2022));
+        expect(data).toContain(new Sentiment(6, 2022));
+        expect(data).toContain(new Sentiment(5, 2022));
+
+        done();
+      })
+    })
+
+    it('returns three sentiment objects with some data', done => {
+      const sentimentDataA = new Sentiment(7, 2022, 5540, 12.209097);
+      const sentimentDataB = new Sentiment(6, 2022, -1250, -5.6179776);
+      const data = [
+        sentimentDataA,
+        sentimentDataB
+      ]
+
+      finnhubApiSpy.fetchSentimentData.and.returnValue(of(data));
+
+      const currentMonth: Month = 8
+      const now = new Date(2022, currentMonth - 1, 2);
+
+      service.getSentimentData('APPL', now).subscribe(data => {
+
+        expect(data.length).toBe(3);
+        expect(data).toContain(sentimentDataA);
+        expect(data).toContain(sentimentDataB);
+        expect(data).toContain(new Sentiment(5, 2022));
+
+        done();
+      })
+    });
+
+    it('returns three sentiment objects with all data', done => {
+      const sentimentDataA = new Sentiment(7, 2022, 5540, 12.209097);
+      const sentimentDataB = new Sentiment(6, 2022, -1250, -5.6179776);
+      const sentimentDataC = new Sentiment(5, 2022, -1250, -2.1459227);
+      const data = [
+        sentimentDataA,
+        sentimentDataB,
+        sentimentDataC
+      ]
+
+      finnhubApiSpy.fetchSentimentData.and.returnValue(of(data));
+
+      const currentMonth: Month = 8
+      const now = new Date(2022, currentMonth - 1, 2);
+
+      service.getSentimentData('APPL', now).subscribe(data => {
+
+        expect(data.length).toBe(3);
+        expect(data).toContain(sentimentDataA);
+        expect(data).toContain(sentimentDataB);
+        expect(data).toContain(sentimentDataC);
+
+        done();
+      })
+    });
+
+    it('returns also correct values if years are different', done => {
+      finnhubApiSpy.fetchSentimentData.and.returnValue(of([]));
+
+      const currentMonth: Month = 2
+      const now = new Date(2022, currentMonth - 1, 2);
+
+      service.getSentimentData('APPL', now).subscribe(data => {
+
+        expect(data.length).toBe(3);
+        expect(data).toContain(new Sentiment(1, 2022));
+        expect(data).toContain(new Sentiment(12, 2021));
+        expect(data).toContain(new Sentiment(11, 2021));
+
+        done();
+      })
+    })
+
+  })
 
   describe('removeStock', () => {
 

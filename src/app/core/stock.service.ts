@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, tap } from 'rxjs';
 import { FinnhubApiService } from './finnhub-api.service';
 import { Logger } from './logger.service';
-import { Quote, Stock } from './stock.model';
+import { Month, Quote, Sentiment, Stock } from './stock.model';
 import { StorageService } from './storage.service';
 
 @Injectable({
@@ -97,6 +97,31 @@ export class StockService {
         return of(null);
       })
     )
+  }
+
+  getSentimentData(symbol: string, now: Date = new Date()): Observable<Sentiment[]> {
+    return this.finnhubApi.fetchSentimentData(symbol).pipe(
+      map((data => {
+        return [
+          this.findSentiment(data, this.calcDate(1, now)),
+          this.findSentiment(data, this.calcDate(2, now)),
+          this.findSentiment(data, this.calcDate(3, now)),
+        ];
+      }))
+    )
+  }
+
+  private findSentiment(data: Sentiment[], date: Date): Sentiment {
+    const month = date.getMonth() + 1 as Month;
+    return data.find(sentiment => sentiment.month === month) ?? 
+      new Sentiment(month, date.getFullYear())
+  }
+
+  private calcDate(number: number, now: Date): Date {
+    return (new Date(
+      now.getFullYear(), 
+      now.getMonth() - number, 
+    1));
   }
 
   removeStock(symbol: string): void {
