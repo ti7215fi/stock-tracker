@@ -6,4 +6,5 @@ import { Component, Input } from "@angular/core";
 })
 export class MockCompanyNameComponent {
     @Input() symbol: string = ''
+    @Input() showSymbol: boolean = false
 }
